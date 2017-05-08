@@ -2,8 +2,7 @@
 
 ## The Simple Queue App
 
-The structure of this application is based off directives acting as components handling their own data. The backend is a simple
-NodeJS server serving in memory JSON objects.
+The structure of this application is based off directives acting as components handling their own data. The backend is a simple NodeJS server serving in memory JSON objects. Dependencies have been versioned for your convenience.
 
 ## Requirements
 
@@ -58,8 +57,4 @@ This is a JSON api:
 
 ## Ready, get set - GO!
 
- - Install the app: `npm install`
-
- - Start the server: `npm start`
-
-App is at http://127.0.0.1:1337, good luck!
+Start the server: `npm start`. App is at http://127.0.0.1:1337, good luck!
