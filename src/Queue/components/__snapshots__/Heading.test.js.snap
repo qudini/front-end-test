@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Heading Component matches snapshot 1`] = `
+<DocumentFragment>
+  .c0 {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: darkslategrey;
+}
+
+.c0 h1 {
+  font-size: 2em;
+}
+
+.c0 h2 {
+  font-size: 1.5em;
+}
+
+.c0 h3 {
+  font-size: 1.2em;
+}
+
+<h1
+    class="c0"
+  >
+    Snapshot Test
+  </h1>
+</DocumentFragment>
+`;

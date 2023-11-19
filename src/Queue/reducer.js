@@ -4,7 +4,7 @@ export const initialState = {
     customers: [],
 };
 
-export default (state = initialState, action) => {
+const queueReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_CUSTOMERS:
             return { ...state, customers: action.payload };
@@ -12,3 +12,5 @@ export default (state = initialState, action) => {
             return state;
     }
 };
+
+export default queueReducer;

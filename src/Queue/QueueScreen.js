@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback, useState} from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { fetchQueueData } from "../mockApi";
 import md5 from 'md5';
@@ -9,32 +9,17 @@ import Content from "./components/Content";
 import CustomerCard from "./components/CustomerCard";
 import ProfilePicture from "./components/ProfilePicture";
 import { SET_CUSTOMERS } from "./actions/actionTypes";
+import Filter from "./components/Filter";
+import Heading from "./components/Heading";
 
 const defaultPerson = '/images/defaultPerson.jpeg';
 
 const QueueScreen = ({ customers }) => {
+    const [filterValue, setFilterValue] = useState('');
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetchQueueData();
-                const json = await response.json();
-                const fetchedCustomers = json.queueData.queue.customersToday;
-                console.log('fetchedCustomers', fetchedCustomers)
-                dispatch(setCustomers(fetchedCustomers));
-                await fetchGravatarImages(fetchedCustomers);
-
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-        fetchData()
-    }, [dispatch, fetchGravatarImages]);
-
-    const fetchGravatarImages = async (customers) => {
+    const fetchGravatarImages = useCallback(async (customers) => {
         if (!customers || !Array.isArray(customers)) {
-            console.error("Invalid 'customers' array:", customers);
             return;
         }
 
@@ -43,14 +28,11 @@ const QueueScreen = ({ customers }) => {
 
         // Use Promise.all to wait for all image fetches to complete
         await Promise.all(customers.map(async (customer) => {
-            console.log('customer', customer);
             const { emailAddress } = customer.customer;
 
             // Check if emailAddress is not null and not undefined
             if (emailAddress && typeof emailAddress === 'string' && emailAddress.trim() !== '') {
                 const gravatarUrl = `https://www.gravatar.com/avatar/${md5(emailAddress)}?d=identicon`;
-                console.log('gravatarUrl', gravatarUrl);
-
                 try {
                     const response = await fetch(gravatarUrl);
                     if (!response.ok) {
@@ -60,9 +42,6 @@ const QueueScreen = ({ customers }) => {
                     } else {
                         const blob = await response.blob();
                         const imageUrl = URL.createObjectURL(blob);
-
-                        console.log('Gravatar image fetched successfully. Image URL:', imageUrl);
-
                         // Add the updated customer to the array
                         updatedCustomers.push({ ...customer, gravatarUrl: imageUrl });
                     }
@@ -80,14 +59,51 @@ const QueueScreen = ({ customers }) => {
             type: SET_CUSTOMERS,
             payload: updatedCustomers,
         });
+    }, [dispatch]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetchQueueData();
+                if (!response) {
+                    console.error('Error fetching data: Response is undefined');
+                    return;
+                }
+                const json = await response.json();
+                if (!json) {
+                    console.error('Error fetching data: JSON is undefined');
+                    return;
+                }
+                const fetchedCustomers = json.queueData.queue.customersToday;
+                dispatch(setCustomers(fetchedCustomers));
+                await fetchGravatarImages(fetchedCustomers);
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        fetchData()
+    }, [dispatch, fetchGravatarImages]);
+
+    const handleFilterChange = (value) => {
+        setFilterValue(value);
     };
+
+    const filteredCustomers = customers && Array.isArray(customers)
+        ? customers.filter((customer) =>
+            customer.customer.name.toLowerCase().includes(filterValue.toLowerCase())
+        )
+        : [];
 
     return (
         <Content>
-            {customers.map((customer) => (
+            <Heading level={1}>Customer queue</Heading>
+            <Filter filterValue={filterValue} onFilterChange={handleFilterChange} />
+            {filteredCustomers.map((customer) =>
+            (
                 <CustomerCard key={customer.customer.id}>
-                    <ProfilePicture imageUrl={customer.gravatarUrl ? customer.gravatarUrl: defaultPerson }></ProfilePicture>
                     <Name>{customer.customer.name}</Name>
+                    <ProfilePicture imageUrl={customer.gravatarUrl ? customer.gravatarUrl : defaultPerson } alt={customer.customer.name}/>
                     <Time dateTime={customer.expectedTime} />
                 </CustomerCard>
             ))}

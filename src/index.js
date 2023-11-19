@@ -11,16 +11,23 @@ import './index.css';
 import logo from './qudini-logo.png';
 import Content from './components/Content';
 
-const App = () =>
+const App = () => (
     <Provider store={store}>
         <Container>
             <Navigation>
-                <Logo src={logo} />
+                <Logo src={logo} alt="Qudini Logo" />
             </Navigation>
             <Content>
-            <QueueScreen />
+                <QueueScreen />
             </Content>
         </Container>
-    </Provider>;
+    </Provider>
+);
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+    ReactDOM.render(<App />, rootElement);
+}
+
+export default App;
