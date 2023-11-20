@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QueueScreen matches snapshot 1`] = `
+.c6 {
+  font-size: 20px;
+  color: darkslategrey;
+}
+
+.c8 {
+  font-size: 16px;
+  color: darkslategrey;
+}
+
+.c0 {
+  padding-left: 1em;
+  padding-right: 1em;
+  font-family: 'Ubuntu',sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.c5 {
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgray;
+  border-radius: 0.2em;
+  width: 300px;
+  height: 370px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+
+.c7 {
+  height: 290px;
+  width: 290px;
+  background-color: grey;
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+}
+
+.c2 {
+  padding-bottom: 10px;
+  width: 342px;
+}
+
+.c3 {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: darkslategrey;
+}
+
+.c4 {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.c1 {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: darkslategrey;
+}
+
+.c1 h1 {
+  font-size: 2em;
+}
+
+.c1 h2 {
+  font-size: 1.5em;
+}
+
+.c1 h3 {
+  font-size: 1.2em;
+}
+
+<div
+  className="c0"
+>
+  <h1
+    className="c1"
+  >
+    Customer queue
+  </h1>
+  <div
+    className="c2"
+  >
+    <label
+      className="c3"
+      htmlFor="filterInput"
+    >
+      Filter
+    </label>
+    <input
+      className="c4"
+      id="filterInput"
+      onChange={[Function]}
+      placeholder="Filter by name"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="c5"
+  >
+    <h1
+      className="c6"
+    >
+      John Doe
+    </h1>
+    <img
+      alt="John Doe"
+      className="c7"
+      src="mocked-url1"
+    />
+    <h1
+      className="c8"
+    >
+      November 20, 2023, 12:00:00 PM GMT
+    </h1>
+  </div>
+  <div
+    className="c5"
+  >
+    <h1
+      className="c6"
+    >
+      Jane Doe
+    </h1>
+    <img
+      alt="Jane Doe"
+      className="c7"
+      src="mocked-url2"
+    />
+    <h1
+      className="c8"
+    >
+      November 20, 2023, 12:00:00 PM GMT
+    </h1>
+  </div>
+</div>
+`;

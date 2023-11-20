@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
-export default styled.img`
+const LogoImage = styled.img`
     width: 100px;
 `;
+
+const Logo = ({ alt, ...props }) => {
+    return <LogoImage alt={alt} {...props} />;
+};
+
+export default Logo;

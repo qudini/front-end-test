@@ -1,12 +1,16 @@
-import { List } from 'immutable';
+import { SET_CUSTOMERS } from './actions/actionTypes';
 
 export const initialState = {
-    customers: List.of()
+    customers: [],
 };
 
-export default (state = initialState, action) => {
-    switch(action.type) {
+const queueReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case SET_CUSTOMERS:
+            return { ...state, customers: action.payload };
         default:
             return state;
     }
-}
+};
+
+export default queueReducer;
