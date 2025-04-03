@@ -27,6 +27,8 @@ We would like to see the following practised within the implementation:
 
 You’re free to use any 3rd party library or framework if you can justify the need.
 
+If some reason you are not able to run the project on your local machine you can use https://codesandbox.io/p/sandbox/r49ypl
+
 ## Submission
 The completed project should be shared via a public `Github` repo.
 
